@@ -1,0 +1,48 @@
+.test-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.option-button {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.option-button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.option-button.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.submit-button {
+    margin-top: 1rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.result-container {
+    align-items: center;
+}
