@@ -97,6 +97,70 @@ GROQ_API_KEY=sua_api_groq
 PORT=5000
 ```
 
+### Configuração do PostgreSQL
+```bash
+DROP TABLE IF EXISTS recommendations, quiz_attempts, user_completed_lessons, quizzes, lessons, users CASCADE;
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    english_level VARCHAR(20) DEFAULT 'beginner',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE lessons (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    level_required VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_completed_lessons (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    lesson_id INTEGER REFERENCES lessons(id) ON DELETE CASCADE,
+    completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, lesson_id)
+);
+
+CREATE TABLE quizzes (
+    id SERIAL PRIMARY KEY,
+    lesson_id INTEGER UNIQUE REFERENCES lessons(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE quiz_attempts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
+    score INTEGER,
+    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
+    end_time TIMESTAMP WITH TIME ZONE,
+    status VARCHAR(20) DEFAULT 'in_progress'
+);
+
+CREATE TABLE recommendations (
+    id SERIAL PRIMARY KEY,
+    lesson_id INTEGER REFERENCES lessons(id) ON DELETE CASCADE,
+    type VARCHAR(10) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    url_or_description TEXT NOT NULL
+);
+
+CREATE TABLE questions (
+    id SERIAL PRIMARY KEY,
+    quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
+    question_text TEXT NOT NULL,
+    options JSONB NOT NULL, -- Ex: '["option A", "option B", "option C", "option D"]'
+    correct_answer INTEGER NOT NULL -- Ex: 0 para a primeira opção, 1 para a segunda, etc.
+);
+
+CREATE INDEX idx_users_email ON users(email);
+```
+
 ## Visual do projeto
 
 Aula feita por IA, com base no conhecimento do aluno.
