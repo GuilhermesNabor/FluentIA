@@ -13,6 +13,8 @@ const placementRoutes = require('./routes/placement.routes');
 const lessonsRoutes = require('./routes/lessons.routes');
 const quizRoutes = require('./routes/quiz.routes');   
 
+const chatRoutes = require('./routes/chat.routes');
+
 const app = express();
 const server = http.createServer(app);
 
@@ -21,6 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/lessons', lessonsRoutes); 
 app.use('/api/quiz', quizRoutes); 
+app.use('/api/chat', chatRoutes);
 
 app.get('/api', (req, res) => {
   res.json({ message: 'API do FluentIA rodando!' });

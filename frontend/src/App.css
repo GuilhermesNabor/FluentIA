@@ -10,7 +10,6 @@ body {
     min-height: 100vh;
 }
 
-/* --- Header --- */
 .app-header {
     background-color: #ffffff;
     padding: 1rem 2rem;
@@ -43,7 +42,6 @@ body {
     background-color: rgba(13, 110, 253, 0.1) !important;
 }
 
-/* --- Conteúdo Principal (Estilo Feed) --- */
 .app-main-content {
     flex-grow: 1;
     width: 100%;
@@ -262,6 +260,84 @@ button:disabled {
 
 .result-container .submit-button {
     background-color: #0d6efd !important;
+}
+
+
+.no-underline {
+    text-decoration: none;
+}
+
+.modal-overlay {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; 
+    padding: 1rem;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.modal-content p {
+    margin: 1rem 0 2rem 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-button {
+    padding: 10px 25px !important;
+    font-weight: 600 !important;
+    width: auto !important;
+    border-radius: 8px !important;
+}
+
+.modal-button.confirm {
+    background-color: #198754 !important;
+}
+
+.modal-button.confirm:hover {
+    background-color: #157347 !important;
+}
+
+.modal-button.cancel {
+    background-color: transparent !important;
+    color: #6c757d !important;
+    border: 1px solid #6c757d !important;
+}
+
+.modal-button.cancel:hover {
+    background-color: #f1f1f1 !important;
 }
 
 @media (max-width: 768px) {

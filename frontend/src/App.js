@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -8,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 import LessonPage from './pages/LessonPage';
 import QuizPage from './pages/QuizPage';
+import ChatPage from './pages/ChatPage';
 
 const AppHeader = () => {
   const navigate = useNavigate();
@@ -49,6 +49,7 @@ function App() {
               <Route path="/placement-test" element={<PlacementTestPage />} />
               <Route path="/lesson/:lessonId" element={<LessonPage />} /> 
               <Route path="/quiz/:attemptId" element={<QuizPage />} />
+              <Route path="/chat" element={<ChatPage />} />
             </Route>
           </Routes>
         </main>

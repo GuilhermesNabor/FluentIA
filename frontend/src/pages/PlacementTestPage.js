@@ -48,7 +48,6 @@ const PlacementTestPage = () => {
             const response = await submitResult(score, token);
             setTestResult(response.data);
             localStorage.setItem('user', JSON.stringify(response.data.user)); 
-            localStorage.setItem('test_completed', 'true'); 
         } catch (error) {
             alert("Houve um erro ao enviar seu resultado.");
         } finally {

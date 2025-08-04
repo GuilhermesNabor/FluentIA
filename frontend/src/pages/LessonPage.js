@@ -36,7 +36,6 @@ const LessonPage = () => {
     const handleReadAloud = () => {
         if (!lesson || !lesson.content) return;
 
-        // Se já estiver falando, para a leitura
         if (isSpeaking) {
             window.speechSynthesis.cancel();
             setIsSpeaking(false);
