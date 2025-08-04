@@ -99,7 +99,7 @@ PORT=5000
 
 ### Configuração do PostgreSQL
 ```bash
-DROP TABLE IF EXISTS recommendations, quiz_attempts, user_completed_lessons, quizzes, lessons, users CASCADE;
+DROP TABLE IF EXISTS recommendations, quiz_attempts, user_completed_lessons, questions, quizzes, lessons, users CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -154,11 +154,12 @@ CREATE TABLE questions (
     id SERIAL PRIMARY KEY,
     quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
     question_text TEXT NOT NULL,
-    options JSONB NOT NULL, -- Ex: '["option A", "option B", "option C", "option D"]'
-    correct_answer INTEGER NOT NULL -- Ex: 0 para a primeira opção, 1 para a segunda, etc.
+    options JSONB NOT NULL,
+    correct_answer INTEGER NOT NULL
 );
 
-CREATE INDEX idx_users_email ON users(email);
+ALTER TABLE users ALTER COLUMN english_level SET DEFAULT 'untested';
+UPDATE users SET english_level = 'untested' WHERE english_level = 'beginner';
 ```
 
 ## Visual do projeto
