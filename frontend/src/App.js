@@ -8,6 +8,7 @@ import './App.css';
 import LessonPage from './pages/LessonPage';
 import QuizPage from './pages/QuizPage';
 import ChatPage from './pages/ChatPage';
+import ThemeToggle from './components/ThemeToggle';
 
 const AppHeader = () => {
   const navigate = useNavigate();
@@ -25,9 +26,12 @@ const AppHeader = () => {
       <Link to={token ? "/dashboard" : "/login"} className="logo">FluentIA</Link>
       
       {token && (
-        <button onClick={handleLogout} className="header-logout-button">
-          Sair
-        </button>
+        <div className="header-controls">
+          <ThemeToggle />
+          <button onClick={handleLogout} className="header-logout-button">
+            Sair
+          </button>
+        </div>
       )}
     </header>
   );
