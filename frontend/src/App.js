@@ -9,6 +9,7 @@ import LessonPage from './pages/LessonPage';
 import QuizPage from './pages/QuizPage';
 import ChatPage from './pages/ChatPage';
 import ThemeToggle from './components/ThemeToggle';
+import ProgressPage from './pages/ProgressPage';
 
 const AppHeader = () => {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ function App() {
               <Route path="/lesson/:lessonId" element={<LessonPage />} /> 
               <Route path="/quiz/:attemptId" element={<QuizPage />} />
               <Route path="/chat" element={<ChatPage />} />
+              <Route path="/progress" element={<ProgressPage />} />
             </Route>
           </Routes>
         </main>

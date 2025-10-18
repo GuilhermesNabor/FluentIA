@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const ConfirmationModal = ({ onConfirm, onCancel }) => {
@@ -20,7 +20,7 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
 const DashboardPage = () => {
     const [user, setUser] = useState(null);
     const [isCreatingLesson, setIsCreatingLesson] = useState(false);
-    const [showChatModal, setShowChatModal] = useState(false); 
+    const [showChatModal, setShowChatModal] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,6 +31,17 @@ const DashboardPage = () => {
             navigate('/login');
         }
     }, [navigate]);
+
+    useEffect(() => {
+        if (showChatModal) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+        return () => {
+            document.body.classList.remove('modal-open');
+        };
+    }, [showChatModal]);
 
     const handleNewLesson = async () => {
         setIsCreatingLesson(true);
@@ -69,7 +80,7 @@ const DashboardPage = () => {
             </div>
 
             <div className="level-highlight-card">
-                <span>SEU NÍVEL ATUAL</span>
+                <span className="level-title">SEU NÍVEL ATUAL</span>
                 <div className="level-badge">{user.english_level.toUpperCase()}</div>
             </div>
 
@@ -86,11 +97,12 @@ const DashboardPage = () => {
                     <p>Converse com a IA para treinar sua escrita.</p>
                 </div>
                 
-                <div className="dashboard-card secondary-cta" onClick={featureComingSoon}>
+                <Link to="/progress" className="dashboard-card secondary-cta no-underline">
                     <div className="card-icon">📈</div>
                     <h4>Ver Progresso</h4>
                     <p>Veja seu histórico de aulas e quizzes.</p>
-                </div>
+                </Link>
+                
                 <div className="dashboard-card secondary-cta" onClick={featureComingSoon}>
                     <div className="card-icon">⚙️</div>
                     <h4>Configurações</h4>

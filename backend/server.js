@@ -15,6 +15,8 @@ const quizRoutes = require('./routes/quiz.routes');
 
 const chatRoutes = require('./routes/chat.routes');
 
+const progressRoutes = require('./routes/progress.routes');
+
 const app = express();
 const server = http.createServer(app);
 
@@ -24,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/lessons', lessonsRoutes); 
 app.use('/api/quiz', quizRoutes); 
 app.use('/api/chat', chatRoutes);
+app.use('/api/progress', progressRoutes);
 
 app.get('/api', (req, res) => {
   res.json({ message: 'API do FluentIA rodando!' });
